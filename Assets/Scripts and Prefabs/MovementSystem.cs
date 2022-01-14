@@ -12,10 +12,9 @@ public class MovementSystem : SystemBase
     {
         float deltaTime = Time.DeltaTime;
 
-        Entities.ForEach((ref PhysicsVelocity translation, in VelocityComponent velocity, in LocalToWorld localToWorld) =>
+        Entities.ForEach((ref PhysicsVelocity translation, in VelocityComponent velocity, in TargetComponent target, in Translation position) =>
         {
-            translation.Linear += (velocity.Value - localToWorld.Position)*velocity.Speed*deltaTime;
-            
+            translation.Linear += (target.Value - position.Value)*velocity.Value*deltaTime;
         }).ScheduleParallel();
     }
 }

@@ -7,4 +7,7 @@ public struct GameSettingsComponent : IComponentData
 {
     public int numCapsules;
     public float capsuleVelocity;
+    public float sceneSize;
+    public float playerSpeed;
+    public float mouseSensitivity;
 }

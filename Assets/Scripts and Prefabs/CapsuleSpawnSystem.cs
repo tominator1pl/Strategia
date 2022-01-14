@@ -45,17 +45,20 @@ public class CapsuleSpawnSystem : SystemBase
             //for(int i = count; i< settings.numCapsules; ++i)
             if(count < settings.numCapsules)
             {
-                var pos = new Translation { Value = new float3(rand.NextFloat(-1f, 1f), 0f, rand.NextFloat(-1f, 1f)) };
+                var pos = new Translation { Value = new float3(rand.NextFloat(-1f, 1f), rand.NextFloat(-1f, 1f), rand.NextFloat(-1f, 1f)) };
                 var e = commandBuffer.Instantiate(capsulePrefab);
                 commandBuffer.SetComponent(e, pos);
 
                 var randomVel = new Vector3(rand.NextFloat(-1f, 1f), rand.NextFloat(-1f, 1f), rand.NextFloat(-1f, 1f));
                 var randomColor = randomVel;
                 //randomVel.Normalize();
-                randomVel *= 50; //half a size of a toest room
+                randomVel *= settings.sceneSize; //half a size of a toest room
                 //randomVel = randomVel * settings.capsuleVelocity;
-                var vel = new VelocityComponent { Value = randomVel, Speed = settings.capsuleVelocity };
+                var vel = new VelocityComponent { Value = settings.capsuleVelocity };
                 commandBuffer.SetComponent(e, vel);
+
+                var tar = new TargetComponent { Value = randomVel };
+                commandBuffer.SetComponent(e, tar);
 
                 randomColor /= 2;
                 randomColor += new Vector3(0.5f, 0.5f, 0.5f);

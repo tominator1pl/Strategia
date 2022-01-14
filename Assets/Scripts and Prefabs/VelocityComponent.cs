@@ -5,6 +5,5 @@ using UnityEngine;
 [GenerateAuthoringComponent]
 public struct VelocityComponent : IComponentData
 {
-    public float3 Value;
-    public float Speed;
+    public float Value;
 }
