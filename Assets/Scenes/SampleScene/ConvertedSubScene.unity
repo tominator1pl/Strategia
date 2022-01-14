@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7844aa53992598f4c91f91b5cbc57759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCapsules: 10000
-  capsuleVelocity: 10
+  numCapsules: 20000
+  capsuleVelocity: 0.2
 --- !u!1 &1779997635
 GameObject:
   m_ObjectHideFlags: 0

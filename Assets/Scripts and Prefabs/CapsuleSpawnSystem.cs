@@ -50,14 +50,17 @@ public class CapsuleSpawnSystem : SystemBase
                 commandBuffer.SetComponent(e, pos);
 
                 var randomVel = new Vector3(rand.NextFloat(-1f, 1f), rand.NextFloat(-1f, 1f), rand.NextFloat(-1f, 1f));
-                randomVel.Normalize();
-                randomVel = randomVel * settings.capsuleVelocity;
-                var vel = new VelocityComponent { Value = randomVel };
+                var randomColor = randomVel;
+                //randomVel.Normalize();
+                randomVel *= 50; //half a size of a toest room
+                //randomVel = randomVel * settings.capsuleVelocity;
+                var vel = new VelocityComponent { Value = randomVel, Speed = settings.capsuleVelocity };
                 commandBuffer.SetComponent(e, vel);
 
-                randomVel.Normalize();
-                CapsuleColor capsuleColor = new CapsuleColor { Value = new float4(randomVel.x, randomVel.y, randomVel.z,1f) };
-                commandBuffer.AddComponent(e, capsuleColor);
+                randomColor /= 2;
+                randomColor += new Vector3(0.5f, 0.5f, 0.5f);
+                CapsuleColor capsuleColor = new CapsuleColor { Value = new float4(randomColor.x, randomColor.y, randomColor.z,1f) };
+                commandBuffer.SetComponent(e, capsuleColor);
             }
         }).Schedule();
 

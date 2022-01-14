@@ -6,4 +6,5 @@ using UnityEngine;
 public struct VelocityComponent : IComponentData
 {
     public float3 Value;
+    public float Speed;
 }
