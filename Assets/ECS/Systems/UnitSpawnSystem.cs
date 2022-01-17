@@ -35,7 +35,7 @@ public class UnitSpawnSystem : SystemBase
 
         Entities.WithAll<UnitSpawnPointTag>().ForEach((ref UnitSpawnPointTag unitSpawnPointTag, in TeamTag teamTag, in Translation position) =>
         {
-            if (count > settings.numCapsules) return;
+            if (count > settings.numCapsules)  return;
             if (unitSpawnPointTag.Enabled == false) return;
             //unitSpawnPointTag.Enabled = false;
             Entity e = commandBuffer.Instantiate(unitPrefab);
