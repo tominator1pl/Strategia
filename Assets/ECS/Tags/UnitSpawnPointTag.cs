@@ -7,4 +7,5 @@ using Unity.Mathematics;
 public struct UnitSpawnPointTag : IComponentData
 {
     public bool Enabled;
+    public int NumToSpawn;
 }

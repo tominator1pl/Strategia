@@ -50,10 +50,18 @@ public class CollisionSystem : JobComponentSystem
                 {
                     UnitComponents unitA = unitComponents[entityA];
                     UnitComponents unitB = unitComponents[entityB];
-                    unitA.Health--;
-                    unitB.Health--;
-                    unitComponents[entityA] = unitA;
-                    unitComponents[entityB] = unitB;
+                    if(unitA.Health <=0 || unitB.Health <= 0)
+                    {
+
+                    }
+                    else
+                    {
+                        unitA.Health -= unitB.Damage;
+                        unitB.Health -= unitA.Damage;
+                        unitComponents[entityA] = unitA;
+                        unitComponents[entityB] = unitB;
+                    }
+                    
                 }
             }
         }

@@ -33,13 +33,13 @@ public class UnitSpawnSystem : SystemBase
         var settings = GetSingleton<GameSettingsComponent>();
         var count = m_UnitQuery.CalculateEntityCountWithoutFiltering();
 
-        Entities.WithAll<UnitSpawnPointTag>().ForEach((ref UnitSpawnPointTag unitSpawnPointTag, in TeamTag teamTag, in Translation position) =>
+        Entities.WithAll<UnitSpawnPointTag>().ForEach((ref UnitSpawnPointTag unitSpawnPointTag, in TeamTag teamTag, in Translation position, in UnitComponents unitBase) =>
         {
             if (count > settings.numCapsules)  return;
             if (unitSpawnPointTag.Enabled == false) return;
-            //unitSpawnPointTag.Enabled = false;
             Entity e = commandBuffer.Instantiate(unitPrefab);
             var color = default(ColorComponent);
+            var unitComponents = unitBase;
             if (teamTag.Value == TeamValue.Enemy)
             {
                 color.Value = new float4(1f, 0f, 0f, 1f);
@@ -48,8 +48,11 @@ public class UnitSpawnSystem : SystemBase
             {
                 color.Value = new float4(0f, 0f, 1f, 1f);
             }
+            unitSpawnPointTag.NumToSpawn--;
+            if (unitSpawnPointTag.NumToSpawn <= 0) unitSpawnPointTag.Enabled = false;
             commandBuffer.SetComponent(e, new Translation { Value = position.Value });
             commandBuffer.SetComponent(e, teamTag); //set unit team
+            commandBuffer.SetComponent(e, unitComponents);
 
 
         }).Schedule();
