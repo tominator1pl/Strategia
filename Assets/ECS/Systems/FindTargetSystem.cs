@@ -61,7 +61,7 @@ public class FindTargetSystem : SystemBase
                     }
                 }
                 targetComponent.Value = target;
-                targetComponent.nextRetarget = time + 1d;
+                targetComponent.nextRetarget = time + 0.1d;
             }
         }).ScheduleParallel();
         targetJob.positions.Dispose(Dependency);

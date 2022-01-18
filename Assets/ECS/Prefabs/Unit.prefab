@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8114830595706806487}
   - component: {fileID: 8585260031029080191}
   - component: {fileID: 7495101874999174014}
-  - component: {fileID: 6229545186769700409}
   - component: {fileID: 1327391474590445685}
+  - component: {fileID: 2165978076692020893}
   m_Layer: 0
   m_Name: Face
   m_TagString: Untagged
@@ -85,23 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6229545186769700409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2354637228203667553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4624f1a0aa6678b49bcdc6bb945a4078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Value:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
 --- !u!114 &1327391474590445685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +98,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamBody: {fileID: 4636223730058561178}
+--- !u!114 &2165978076692020893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2354637228203667553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff19a576f1ff91e40b1aef53ac8608f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
 --- !u!1 &4636223729434407824
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,8 +126,8 @@ GameObject:
   - component: {fileID: 4636223729434407839}
   - component: {fileID: 4636223729434407837}
   - component: {fileID: 4636223729434407838}
-  - component: {fileID: 1634101523106071523}
   - component: {fileID: 652602094082737095}
+  - component: {fileID: 2982486664794893921}
   m_Layer: 0
   m_Name: Hat
   m_TagString: Untagged
@@ -200,23 +200,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1634101523106071523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636223729434407824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4624f1a0aa6678b49bcdc6bb945a4078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Value:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
 --- !u!114 &652602094082737095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +213,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamBody: {fileID: 4636223730058561178}
+--- !u!114 &2982486664794893921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636223729434407824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff19a576f1ff91e40b1aef53ac8608f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
 --- !u!1 &4636223730058561178
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 4845579140320530808}
   - component: {fileID: 7295977698328673933}
   - component: {fileID: 8585699331643163411}
+  - component: {fileID: -6288010493203920516}
   - component: {fileID: 1931459243305162187}
   m_Layer: 0
   m_Name: Unit
@@ -454,14 +455,14 @@ MonoBehaviour:
     m_CustomMaterialTags:
       m_Override: 0
       m_Value:
-        Tag00: 1
-        Tag01: 1
-        Tag02: 1
-        Tag03: 1
-        Tag04: 1
-        Tag05: 1
-        Tag06: 1
-        Tag07: 1
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
 --- !u!114 &4636223730058561177
@@ -554,6 +555,19 @@ MonoBehaviour:
   Speed: 20
   Health: 1
   Damage: 1
+--- !u!114 &-6288010493203920516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636223730058561178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a20584da4ab0f04f99a7c15dd007296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeamBody: {fileID: 4636223729434407824}
 --- !u!114 &1931459243305162187
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,10 +3,14 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
+using UnityEngine;
 
 [GenerateAuthoringComponent]
 [MaterialProperty("_Color",MaterialPropertyFormat.Float4)]
-public struct ColorComponent : IComponentData
+struct ColorComponent : IComponentData
 {
     public float4 Value;
 }
+
+
+

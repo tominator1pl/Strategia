@@ -14,9 +14,9 @@ public class UnitConstrainSystem : SystemBase
 
         Entities.WithAll<UnitTag>().ForEach((ref Translation position,ref Rotation rotation, ref PhysicsVelocity physicsVelocity) =>
         {
-            /*Quaternion curRot = rotation.Value;
+            Quaternion curRot = rotation.Value;
             curRot.eulerAngles = new Vector3(0f, curRot.eulerAngles.y, 0f);
-            rotation.Value = curRot;*/
+            rotation.Value = curRot;
 
             physicsVelocity.Angular = float3.zero;
             position.Value.y = 0f;

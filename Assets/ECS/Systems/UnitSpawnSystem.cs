@@ -38,26 +38,15 @@ public class UnitSpawnSystem : SystemBase
             if (count > settings.numCapsules)  return;
             if (unitSpawnPointTag.Enabled == false) return;
             Entity e = commandBuffer.Instantiate(unitPrefab);
-            var color = default(ColorComponent);
             var unitComponents = unitBase;
-            if (teamTag.Value == TeamValue.Enemy)
-            {
-                color.Value = new float4(1f, 0f, 0f, 1f);
-            }
-            else if (teamTag.Value == TeamValue.Ally)
-            {
-                color.Value = new float4(0f, 0f, 1f, 1f);
-            }
             unitSpawnPointTag.NumToSpawn--;
             if (unitSpawnPointTag.NumToSpawn <= 0) unitSpawnPointTag.Enabled = false;
             commandBuffer.SetComponent(e, new Translation { Value = position.Value });
             commandBuffer.SetComponent(e, teamTag); //set unit team
             commandBuffer.SetComponent(e, unitComponents);
 
-
         }).Schedule();
 
-        //This will add our dependency to be played back on the BeginSimulationEntityCommandBuffer
         m_BeginSimECB.AddJobHandleForProducer(Dependency);
     }
 }

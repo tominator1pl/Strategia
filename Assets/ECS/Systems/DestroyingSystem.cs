@@ -6,11 +6,11 @@ using Unity.Mathematics;
 using Unity.Transforms;
 
 [UpdateInGroup(typeof(LateSimulationSystemGroup))]
-public class DestroySystem : SystemBase
+public class DestroyingSystem : SystemBase
 {
     private EndSimulationEntityCommandBufferSystem m_EndSimEcb;
 
-    protected override void OnCreate()
+    protected override void OnCreate() 
     {
         m_EndSimEcb = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
     }
@@ -19,8 +19,9 @@ public class DestroySystem : SystemBase
     {
         var commandBuffer = m_EndSimEcb.CreateCommandBuffer().AsParallelWriter();
 
-
-        Entities.WithAll<DestroyTag>().ForEach((Entity entity, int nativeThreadIndex) =>
+        Entities
+        .WithAll<DestroyTag>()
+        .ForEach((Entity entity, int nativeThreadIndex) =>
         {
             commandBuffer.DestroyEntity(nativeThreadIndex, entity);
 

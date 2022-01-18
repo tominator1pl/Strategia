@@ -24,7 +24,6 @@ public class TeamColorSystem : SystemBase
                 color = new float4(0f, 0f, 1f, 1f);
             }
             colorComponent.Value = color;
-            //commandBuffer.SetComponent(nativeThreadIndex, entity, color);
         }).ScheduleParallel();
     }
 }
