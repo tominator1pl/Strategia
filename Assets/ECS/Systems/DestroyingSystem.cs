@@ -18,16 +18,16 @@ public class DestroyingSystem : SystemBase
     protected override void OnUpdate()
     {
         var commandBuffer = m_EndSimEcb.CreateCommandBuffer().AsParallelWriter();
-
+        
         Entities
         .WithAll<DestroyTag>()
         .ForEach((Entity entity, int nativeThreadIndex) =>
         {
+            
             commandBuffer.DestroyEntity(nativeThreadIndex, entity);
 
         }).WithBurst().ScheduleParallel();
 
         m_EndSimEcb.AddJobHandleForProducer(Dependency);
-
     }
 }

@@ -5,26 +5,34 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+[UpdateInGroup(typeof(LateSimulationSystemGroup))]
 public class UnitHealthSystem : SystemBase
 {
-    private BeginSimulationEntityCommandBufferSystem m_BeginSimECB;
+    private EndSimulationEntityCommandBufferSystem m_EndSimECB;
 
     protected override void OnCreate()
     {
-        m_BeginSimECB = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+        m_EndSimECB = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
     }
     protected override void OnUpdate()
     {
-        var commandBuffer = m_BeginSimECB.CreateCommandBuffer().AsParallelWriter();
+        var commandBuffer = m_EndSimECB.CreateCommandBuffer().AsParallelWriter();
 
 
-        Entities.WithAll<UnitTag>().ForEach((Entity e,int nativeThreadIndex, in UnitComponents unitComponents) =>
+        Entities
+        .WithAll<UnitComponents>()
+        .ForEach((Entity entity, int nativeThreadIndex, in UnitComponents unitComponents) =>
         {
-            if(unitComponents.Health <= 0)
+
+            if (unitComponents.Health <= 0)
             {
-                commandBuffer.AddComponent(nativeThreadIndex, e, new DestroyTag { });
+                commandBuffer.DestroyEntity(nativeThreadIndex, entity);
             }
-        }).ScheduleParallel();
-        m_BeginSimECB.AddJobHandleForProducer(Dependency);
+
+
+        }).WithBurst().ScheduleParallel();
+
+        m_EndSimECB.AddJobHandleForProducer(Dependency);
+        
     }
 }

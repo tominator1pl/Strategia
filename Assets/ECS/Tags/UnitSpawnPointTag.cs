@@ -8,4 +8,5 @@ public struct UnitSpawnPointTag : IComponentData
 {
     public bool Enabled;
     public int NumToSpawn;
+    public int SpawnRate;
 }
