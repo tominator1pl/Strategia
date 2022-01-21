@@ -14,6 +14,7 @@ public class PlayerS : MonoBehaviour
     public GameObject spawnPoint;
     private Entity spawnPrefab;
     private float nextClick = 0;
+    private bool rightPressed = false;
 
     void Start()
     {
@@ -30,9 +31,18 @@ public class PlayerS : MonoBehaviour
         transform.Translate(Input.GetAxis("Horizontal") * speed * deltaTime, 0f, Input.GetAxis("Vertical") * speed * deltaTime,head.transform);
         transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X")* mouseSens, 0f));
         head.transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y")* mouseSens, 0f, 0f));*/
-        if (Input.GetAxis("Fire1") > 0)
+
+        if(Input.GetAxis("Fire1") > 0)
         {
-            var elapsed = Time.time;
+            
+            if (!Utils.isSelecting)
+            {
+                Utils.targetChanged = false;
+                Utils.isSelecting = true;
+                Utils.firstMousePosition = Input.mousePosition;
+            }
+
+            /*var elapsed = Time.time;
             if(elapsed >= nextClick) {
                 RaycastHit hit;
                 Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -51,8 +61,41 @@ public class PlayerS : MonoBehaviour
 
                 }
                 nextClick = elapsed + 0.05f;
-            }
+            }*/
         }
-        
+        else
+        {
+            Utils.isSelecting = false;
+        }
+        if(Input.GetAxis("Fire2") > 0)
+        {
+            if (!rightPressed)
+            {
+                rightPressed = true;
+                RaycastHit hit;
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Utils.selectionTarget = hit.point;
+                    Utils.targetChanged = true;
+                }
+            }
+            
+        }
+        else
+        {
+            rightPressed = false;
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (Utils.isSelecting)
+        {
+            var rect = Utils.GetScreenRect(Utils.firstMousePosition, Input.mousePosition);
+            Utils.DrawScreenRect(rect, new Color(0.5f, 0.9f, 0.5f, 0.1f));
+            Utils.DrawScreenRectBorder(rect, 2f, new Color(0.5f, 0.9f, 0.5f));
+        }
     }
 }

@@ -32,7 +32,7 @@ public class UnitHealthSystem : SystemBase
 
         }).WithBurst().ScheduleParallel();
 
-        m_EndSimECB.AddJobHandleForProducer(Dependency);
+        m_EndSimECB.AddJobHandleForProducer(Dependency); 
         
     }
 }

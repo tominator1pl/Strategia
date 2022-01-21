@@ -15,6 +15,7 @@ public class UnitMovementSystem : SystemBase
 
         Entities.WithAll<UnitTag>().ForEach((ref PhysicsVelocity physicsVelocity,ref Rotation rotation, in Translation translation, in TargetComponent target, in UnitComponents unitComponents) =>
         {
+            if (target.TargetReached) return;
             Vector3 direction = (target.Value - translation.Value);
             direction.Normalize();
             physicsVelocity.Linear += (float3)(direction * unitComponents.Speed * deltaTime);
