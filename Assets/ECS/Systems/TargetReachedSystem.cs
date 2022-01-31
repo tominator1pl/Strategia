@@ -11,7 +11,7 @@ public class TargetReachedSystem : SystemBase
 {
     protected override void OnUpdate()
     {
-        Entities.WithAll<TargetComponent>().ForEach((ref TargetComponent targetComponent, ref PhysicsVelocity physicsVelocity, ref Translation translation) => {
+        Entities.WithAll<TargetComponent>().ForEach((ref TargetComponent targetComponent, ref PhysicsVelocity physicsVelocity, ref Translation translation, ref UnitComponents unitComponents) => {
             Vector2 target = new Vector2(targetComponent.Value.x, targetComponent.Value.z);
             Vector2 position = new Vector2(translation.Value.x, translation.Value.z);
 
@@ -20,8 +20,10 @@ public class TargetReachedSystem : SystemBase
 
             if(distance < 0.5f && Vector3.Magnitude(velocity) < 1f)
             {
+                unitComponents.collisionFilter.BelongsTo = 1u << 3 | 1u << 4; //TODO: Fix so all units gets to their spot in grid
+                unitComponents.collisionFilter.CollidesWith = ~0u;
                 targetComponent.TargetReached = true;
-                //translation.Value = new float3(target.x, 0f, target.y);
+                translation.Value = new float3(target.x, 0f, target.y);
                 physicsVelocity.Linear = float3.zero;
             }
 

@@ -83,7 +83,7 @@ public class FindTargetSystem : SystemBase
                             localTargetChanged = true;
                         }
                     }
-                    if (selectionComponent.Value == SelectionType.Selected) return;
+                    if (!targetComponent.TargetReached) return;
                     if (localTargetChanged)
                     {
                         targetComponent.Value = target;

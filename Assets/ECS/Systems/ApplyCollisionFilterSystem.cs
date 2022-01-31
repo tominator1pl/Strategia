@@ -15,22 +15,23 @@ public class ApplyCollisionFilterSystem : SystemBase
     {
         m_BeginSimECB = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
     }
+
+
     protected override void OnUpdate()
     {
         var commandBuffer = m_BeginSimECB.CreateCommandBuffer();
 
-        Entities.ForEach((Entity entity,in PhysicsCollider collider, in UnitComponents unitComponents) => {
-            
-            Assert.IsTrue(collider.Value.Value.CollisionType == CollisionType.Convex);
-            unsafe
+        Entities.ForEach((Entity entity,ref PhysicsCollider collider, ref UnitComponents unitComponents) => {
+
+            if (!unitComponents.clonedCollider)
             {
-                var header = (ConvexCollider*)collider.ColliderPtr;
-                header->Filter = unitComponents.collisionFilter;
+                collider.Value = collider.Value.Value.Clone(); //clone collider from shared collider to local collider, so its editable
+                unitComponents.clonedCollider = true;
             }
+            collider.Value.Value.Filter = unitComponents.collisionFilter;
 
         }).Schedule();
 
         m_BeginSimECB.AddJobHandleForProducer(Dependency);
-        //TODO: Fix This, Detail: collider.value.value.CollisionFilter applies to everything for some reson, clone shits itselfs with memory. Use diffrent thing collision disable  bewtween units for the best of us
     }
 }

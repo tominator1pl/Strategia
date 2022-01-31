@@ -36,19 +36,17 @@ public class SelectedUnitTargetSystem : SystemBase
 
         Vector3 selectionTarget = Utils.selectionTarget;
         bool targetChanged = Utils.targetChanged;
+        rect.position += new Vector2(selectionTarget.x, selectionTarget.z);
 
         double time = Time.ElapsedTime;
         Entities.WithAll<SelectedTag>().ForEach((int entityInQueryIndex, ref TargetComponent targetComponent, ref UnitComponents unitComponents) =>
         {
-            unitComponents.collisionFilter = new CollisionFilter { CollidesWith = (uint)(1) };
-            if (time >= targetComponent.nextRetarget)
-            {
-                if (targetChanged) {
+            if (targetChanged) {
                     targetComponent.Value = selectedTargetJob.grid[entityInQueryIndex] + selectionTarget;
                     targetComponent.TargetReached = false;
-                }
-                targetComponent.nextRetarget = time + 0.1d;
+                    targetComponent.TargetZone = rect;
             }
         }).ScheduleParallel();
+        Utils.targetChanged = false;
     }
 }

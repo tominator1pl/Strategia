@@ -14,6 +14,7 @@ public struct UnitComponents : IComponentData
     public float Sight;
     public float Scale;
     public CollisionFilter collisionFilter;
+    public bool clonedCollider;
 }
 
 
@@ -35,6 +36,7 @@ public class UnitComponentsAuthoring : MonoBehaviour, IConvertGameObjectToEntity
         unitcomponents.Damage = Damage;
         unitcomponents.Sight = Sight;
         unitcomponents.Scale = Scale;
+        unitcomponents.clonedCollider = false;
         var Filter = new CollisionFilter
         {
             BelongsTo = BelongsTo.Value,
