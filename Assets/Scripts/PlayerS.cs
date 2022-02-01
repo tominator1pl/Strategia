@@ -73,7 +73,7 @@ public class PlayerS : MonoBehaviour
         if (scrollZoom.y < 10) scrollZoom.y = 10;
         if (scrollZoom.y > 80) scrollZoom.y = 80;
         transform.position = new Vector3(transform.position.x,scrollZoom.y,transform.position.z);
-        transform.rotation = Quaternion.Euler(new Vector3(10 * Mathf.Log(scrollZoom.y - 8f, 2f) + 20, 0f, 0f));
+        transform.rotation = Quaternion.Euler(new Vector3(10 * Mathf.Log(scrollZoom.y - 8f, 2f) + 20, 0f, 0f)); //smooth zoom in somehow 10log(2, x - 8) + 20
     }
 
     private void OnGUI()
