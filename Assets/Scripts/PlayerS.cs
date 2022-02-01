@@ -9,30 +9,26 @@ public class PlayerS : MonoBehaviour
 {
 
     public Camera cam;
-    private EntityManager entityManager;
+    public float cameraSpeed = 10;
+    public float scrollSpeed = 3000;
+    public int edgeZone = 10;
 
-    public GameObject spawnPoint;
-    private Entity spawnPrefab;
     private float nextClick = 0;
     private bool rightPressed = false;
 
     void Start()
     {
-        entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        BlobAssetStore blobAssetStore = new BlobAssetStore();
-        spawnPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(spawnPoint, GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blobAssetStore));
-        blobAssetStore.Dispose();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*float deltaTime = Time.deltaTime;
-        transform.Translate(Input.GetAxis("Horizontal") * speed * deltaTime, 0f, Input.GetAxis("Vertical") * speed * deltaTime,head.transform);
-        transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X")* mouseSens, 0f));
-        head.transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y")* mouseSens, 0f, 0f));*/
+        float time = Time.deltaTime;
+        float right = Input.GetAxis("Horizontal");
+        float up = Input.GetAxis("Vertical");
 
-        if(Input.GetAxis("Fire1") > 0)
+        if (Input.GetAxis("Fire1") > 0)
         {
             
             if (!Utils.isSelecting)
@@ -41,27 +37,6 @@ public class PlayerS : MonoBehaviour
                 Utils.isSelecting = true;
                 Utils.firstMousePosition = Input.mousePosition;
             }
-
-            /*var elapsed = Time.time;
-            if(elapsed >= nextClick) {
-                RaycastHit hit;
-                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out hit))
-                {
-                    Transform objectHit = hit.transform;
-                    Entity e = entityManager.Instantiate(spawnPrefab);
-                    UnitSpawnPointTag unitSpawnPointTag = new UnitSpawnPointTag { Enabled = true, NumToSpawn = 10, SpawnRate = 10 };
-                    UnitComponents unitComponents = new UnitComponents { Damage = 1, Health = 1, Speed = 20f };
-
-                    entityManager.SetComponentData(e, unitSpawnPointTag);
-                    entityManager.SetComponentData(e, unitComponents);
-                    entityManager.SetComponentData(e, new TeamTag { Value = TeamValue.Ally });
-                    entityManager.SetComponentData(e, new Translation { Value = hit.point });
-
-                }
-                nextClick = elapsed + 0.05f;
-            }*/
         }
         else
         {
@@ -87,6 +62,18 @@ public class PlayerS : MonoBehaviour
         {
             rightPressed = false;
         }
+
+        if (Input.mousePosition.x < edgeZone) right = Mathf.Clamp(-(((float)edgeZone-Input.mousePosition.x)*(1/(float)edgeZone)), -1f, 0f);
+        if (Input.mousePosition.y < edgeZone) up = Mathf.Clamp(-(((float)edgeZone - Input.mousePosition.y) * (1 / (float)edgeZone)), -1f, 0f);
+        if (Input.mousePosition.x > Screen.width - edgeZone) right = Mathf.Clamp((Input.mousePosition.x - (Screen.width - edgeZone)) * (1 / (float)edgeZone), 0f, 1f);
+        if (Input.mousePosition.y > Screen.height - edgeZone) up = Mathf.Clamp((Input.mousePosition.y - (Screen.height - edgeZone)) * (1 / (float)edgeZone), 0f, 1f);
+
+        transform.position += new Vector3(right, 0f, up) * time * cameraSpeed;
+        Vector3 scrollZoom = transform.position + (transform.forward * Input.GetAxis("Mouse ScrollWheel") * time * scrollSpeed);
+        if (scrollZoom.y < 10) scrollZoom.y = 10;
+        if (scrollZoom.y > 80) scrollZoom.y = 80;
+        transform.position = new Vector3(transform.position.x,scrollZoom.y,transform.position.z);
+        transform.rotation = Quaternion.Euler(new Vector3(10 * Mathf.Log(scrollZoom.y - 8f, 2f) + 20, 0f, 0f));
     }
 
     private void OnGUI()

@@ -27,11 +27,7 @@ public class TeamColorSystem : SystemBase
             }
             //TESTING SELECTION
             //TODO: REMOVE
-            if (selectionComponent.Value == SelectionType.Unselected)
-            {
-                color = new float4(0f, 0f, 0f, 1f);
-            }
-            else if (selectionComponent.Value == SelectionType.Marked)
+            if (selectionComponent.Value == SelectionType.Marked)
             {
                 color = new float4(0f, 1f, 0f, 1f);
             }

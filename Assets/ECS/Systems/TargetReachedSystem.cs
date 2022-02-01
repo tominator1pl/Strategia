@@ -20,13 +20,13 @@ public class TargetReachedSystem : SystemBase
 
             if(distance < 0.5f && Vector3.Magnitude(velocity) < 1f)
             {
-                unitComponents.collisionFilter.BelongsTo = 1u << 3 | 1u << 4; //TODO: Fix so all units gets to their spot in grid
+                //unitComponents.collisionFilter.BelongsTo = 1u << 3 | 1u << 4; //TODO: Fix so all units gets to their spot in grid
                 unitComponents.collisionFilter.CollidesWith = ~0u;
                 targetComponent.TargetReached = true;
                 translation.Value = new float3(target.x, 0f, target.y);
                 physicsVelocity.Linear = float3.zero;
             }
 
-        }).Schedule();
+        }).ScheduleParallel();
     }
 }

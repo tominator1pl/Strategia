@@ -668,3 +668,9 @@ MonoBehaviour:
     z: 0
   nextRetarget: 0
   TargetReached: 0
+  TargetZone:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0

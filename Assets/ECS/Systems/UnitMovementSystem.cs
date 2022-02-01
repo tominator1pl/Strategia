@@ -18,8 +18,8 @@ public class UnitMovementSystem : SystemBase
             if (target.TargetReached) return;
             if(target.TargetZone.Contains(new Vector2(translation.Value.x, translation.Value.z)))
             {
-                unitComponents.collisionFilter.BelongsTo = 1u << 4 | 1u << 5; //Change collision to temp Selected units
-                unitComponents.collisionFilter.CollidesWith = ~(1u << 4 | 1u << 5); //doesnt collide with Units and SelectedUnits
+                //unitComponents.collisionFilter.BelongsTo = 1u << 4 | 1u << 5; //Change collision to temp Selected units
+                unitComponents.collisionFilter.CollidesWith = ~(1u << 3 | 1u << 4); //doesnt collide with Units and SelectedUnits
 
             }
 

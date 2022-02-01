@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5070.1484, g: 4314.6094, b: 3172.3477, a: 1}
+  m_IndirectSpecularColor: {r: 5070.1484, g: 4314.6094, b: 3172.4023, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -646,9 +646,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 20218510}
-  spawnPoint: {fileID: 6255411822942150568, guid: 90db9c7cba9df864bbf73e8db314519f,
-    type: 3}
-  sphere: {fileID: 1367886504191745255, guid: a8e98ce976c534b4db747bd21aafa206, type: 3}
+  cameraSpeed: 30
+  scrollSpeed: 5000
+  edgeZone: 10
 --- !u!1 &963445967
 GameObject:
   m_ObjectHideFlags: 0
