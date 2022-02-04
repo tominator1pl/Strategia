@@ -3,6 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -11,12 +12,9 @@ public class TeamColorSystem : SystemBase
     protected override void OnUpdate()
     {
 
-        Entities.WithAll<TeamColorTag>().ForEach((ref ColorComponent colorComponent, in TeamColorTag teamColor) =>
+        Entities.WithAll<TeamTag>().ForEach((ref ColorComponent colorComponent, in TeamTag teamTag, in SelectionComponent selectionComponent) =>
         {
-            Entity e = teamColor.TeamBody;
             float4 color = float4.zero;
-            TeamTag teamTag = GetComponentDataFromEntity<TeamTag>(true)[e];
-            SelectionComponent selectionComponent = GetComponentDataFromEntity<SelectionComponent>(true)[e];
             if (teamTag.Value == TeamValue.Enemy)
             {
                 color = new float4(1f, 0f, 0f, 1f);

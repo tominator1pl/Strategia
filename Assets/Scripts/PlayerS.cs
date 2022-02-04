@@ -13,7 +13,7 @@ public class PlayerS : MonoBehaviour
     public float scrollSpeed = 3000;
     public int edgeZone = 10;
 
-    private float nextClick = 0;
+
     private bool rightPressed = false;
 
     void Start()
@@ -36,6 +36,7 @@ public class PlayerS : MonoBehaviour
                 Utils.targetChanged = false;
                 Utils.isSelecting = true;
                 Utils.firstMousePosition = Input.mousePosition;
+                
             }
         }
         else
