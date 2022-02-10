@@ -33,23 +33,27 @@ public class UnitSpawnSystem : SystemBase
         var settings = GetSingleton<GameSettingsComponent>();
         var count = m_UnitQuery.CalculateEntityCountWithoutFiltering();
 
+        double time = Time.ElapsedTime;
         Entities.WithAll<UnitSpawnPointTag>().ForEach((ref UnitSpawnPointTag unitSpawnPointTag, ref UnitComponents unitBase, in TeamTag teamTag, in Translation position) =>
         {
             if (unitSpawnPointTag.Enabled == false) return;
-            for(int i = 0; i < unitSpawnPointTag.SpawnRate; i++) {
-                if (unitSpawnPointTag.Enabled == false) return;
-                Entity e = commandBuffer.Instantiate(unitPrefab);
-                var unitComponents = unitBase;
-                unitSpawnPointTag.NumToSpawn--;
-                if (unitSpawnPointTag.NumToSpawn <= 0)
-                {
-                    unitSpawnPointTag.Enabled = false;
-                    unitBase.Health = 0;
-                }
-                commandBuffer.SetComponent(e, new Translation { Value = position.Value });
-                commandBuffer.SetComponent(e, teamTag); //set unit team
-                commandBuffer.SetComponent(e, unitComponents);
+            if( time >= unitSpawnPointTag.nextSpawnTime) {
+                for(int i = 0; i < unitSpawnPointTag.SpawnAtOnce; i++) {
+                    if (unitSpawnPointTag.Enabled == false) return;
+                    Entity e = commandBuffer.Instantiate(unitPrefab);
+                    var unitComponents = unitBase;
+                    unitSpawnPointTag.NumToSpawn--;
+                    if (unitSpawnPointTag.NumToSpawn <= 0)
+                    {
+                        unitSpawnPointTag.Enabled = false;
+                        unitBase.Health = 0;
+                    }
+                    commandBuffer.SetComponent(e, new Translation { Value = position.Value });
+                    commandBuffer.SetComponent(e, teamTag); //set unit team
+                    commandBuffer.SetComponent(e, unitComponents);
                 
+                }
+                unitSpawnPointTag.nextSpawnTime = time + unitSpawnPointTag.SpawnRate;
             }
 
         }).Schedule();
