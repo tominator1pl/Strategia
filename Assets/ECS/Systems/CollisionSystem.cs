@@ -49,7 +49,7 @@ public class CollisionSystem : SystemBase
             var entityB = collisionEvent.EntityB;
             //Debug.Log("ass");
 
-            if(teamTag.HasComponent(entityA) && teamTag.HasComponent(entityB))
+            if(teamTag.HasComponent(entityA) && teamTag.HasComponent(entityB) && unitComponents.HasComponent(entityA) && unitComponents.HasComponent(entityB))
             {
                 if(teamTag[entityA].Value != teamTag[entityB].Value)
                 {

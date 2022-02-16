@@ -48,6 +48,10 @@ public class UnitSpawnSystem : SystemBase
                         unitSpawnPointTag.Enabled = false;
                         unitBase.Health = 0;
                     }
+                    var target = default(TargetComponent);
+                    target.Value = position.Value;
+                    target.TargetReached = true;
+                    commandBuffer.SetComponent(e, target);
                     commandBuffer.SetComponent(e, new Translation { Value = position.Value });
                     commandBuffer.SetComponent(e, teamTag); //set unit team
                     commandBuffer.SetComponent(e, unitComponents);
