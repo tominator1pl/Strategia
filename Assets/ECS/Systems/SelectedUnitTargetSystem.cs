@@ -43,7 +43,7 @@ public class SelectedUnitTargetSystem : SystemBase
         {
             if (targetChanged) {
                     targetComponent.Value = selectedTargetJob.grid[entityInQueryIndex] + selectionTarget;
-                    targetComponent.TargetReached = false;
+                    targetComponent.ManualTarget = true;
                     targetComponent.TargetZone = rect;
             }
         }).ScheduleParallel();

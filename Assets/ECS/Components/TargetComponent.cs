@@ -9,6 +9,6 @@ public struct TargetComponent : IComponentData
 {
     public float3 Value;
     public double nextRetarget;
-    public bool TargetReached;
+    public bool ManualTarget;
     public Rect TargetZone;
 }

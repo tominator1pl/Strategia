@@ -50,7 +50,7 @@ public class UnitSpawnSystem : SystemBase
                     }
                     var target = default(TargetComponent);
                     target.Value = position.Value;
-                    target.TargetReached = true;
+                    target.ManualTarget = false;
                     commandBuffer.SetComponent(e, target);
                     commandBuffer.SetComponent(e, new Translation { Value = position.Value });
                     commandBuffer.SetComponent(e, teamTag); //set unit team

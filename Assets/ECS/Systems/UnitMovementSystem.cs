@@ -15,7 +15,7 @@ public class UnitMovementSystem : SystemBase
 
         Entities.WithAll<UnitTag>().ForEach((ref PhysicsVelocity physicsVelocity,ref Rotation rotation, ref UnitComponents unitComponents, in Translation translation, in TargetComponent target ) =>
         {
-            if (target.TargetReached) return;
+            if (Vector3.Distance(translation.Value,target.Value) < 0.5f) return;
             if(target.TargetZone.Contains(new Vector2(translation.Value.x, translation.Value.z)))
             {
                 //unitComponents.collisionFilter.BelongsTo = 1u << 4 | 1u << 5; //Change collision to temp Selected units

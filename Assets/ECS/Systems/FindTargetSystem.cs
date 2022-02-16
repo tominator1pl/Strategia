@@ -62,7 +62,7 @@ public class FindTargetSystem : SystemBase
                     if(targetJob.heartPos.Length > 0) {
                         var heartPosition = targetJob.heartPos[0];
                         targetComponent.Value = heartPosition.Value;
-                        targetComponent.TargetReached = false;
+                        targetComponent.ManualTarget = false;
                     }
                 }
                 else if(teamTag.Value == TeamValue.Ally)
@@ -83,11 +83,11 @@ public class FindTargetSystem : SystemBase
                             localTargetChanged = true;
                         }
                     }
-                    if (!targetComponent.TargetReached) return;
+                    if (targetComponent.ManualTarget) return;
                     if (localTargetChanged)
                     {
                         targetComponent.Value = target;
-                        targetComponent.TargetReached = false;
+                        targetComponent.ManualTarget = false;
                     }
                     
                 }
