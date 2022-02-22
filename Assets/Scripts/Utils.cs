@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class Utils
 {
@@ -13,6 +14,14 @@ public static class Utils
     public static Vector3 selectionTarget = Vector3.zero;
     public static bool targetChanged = false;
 
+    public static int heartHealth;
+    public static int allyUnits;
+    public static int selectedUnits;
+
+    public static bool lost = false;
+    public static double timeSurvived;
+
+    public static bool paused = false;
     public static Texture2D WhiteTexture
     {
         get
@@ -179,4 +188,5 @@ public static class Utils
         rect = Rect.MinMaxRect(grid[0].x, grid[0].y, grid[grid.Length-1].x, grid[grid.Length-1].y);
         return grid;
     }
+
 }

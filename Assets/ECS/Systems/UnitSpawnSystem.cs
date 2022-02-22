@@ -34,8 +34,10 @@ public class UnitSpawnSystem : SystemBase
         var count = m_UnitQuery.CalculateEntityCountWithoutFiltering();
 
         double time = Time.ElapsedTime;
+        bool paused = Utils.paused;
         Entities.WithAll<UnitSpawnPointTag>().ForEach((ref UnitSpawnPointTag unitSpawnPointTag, ref UnitComponents unitBase, in TeamTag teamTag, in Translation position) =>
         {
+            if (paused) return;
             if (unitSpawnPointTag.Enabled == false) return;
             if( time >= unitSpawnPointTag.nextSpawnTime) {
                 for(int i = 0; i < unitSpawnPointTag.SpawnAtOnce; i++) {
