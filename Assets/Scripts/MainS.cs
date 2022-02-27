@@ -87,7 +87,7 @@ public class MainS : MonoBehaviour
     void OnRetryClick()
     {
         World.DisposeAllWorlds();
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
         DefaultWorldInitialization.Initialize("World");
     }
 
@@ -97,7 +97,7 @@ public class MainS : MonoBehaviour
         Utils.isSelecting = false;
         Utils.lost = false;
         World.DisposeAllWorlds();
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     void OnContinueClick()

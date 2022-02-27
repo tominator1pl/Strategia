@@ -9,6 +9,8 @@ public struct UnitSpawnPointTag : IComponentData
     public bool Enabled;
     public int NumToSpawn;
     public int SpawnAtOnce;
+    public int targetSpawnAtOnce;
+    public int SpawnAtOnceChange;
     public float SpawnRate;
     public double nextSpawnTime;
 }

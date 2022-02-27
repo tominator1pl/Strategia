@@ -482,7 +482,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0c9055875723b54a8416325c6ebcd5d, type: 2}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2945,7 +2945,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2996,7 +2996,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh103118
+  m_Name: pb_Mesh34064
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3574,22 +3574,32 @@ PrefabInstance:
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: SpawnRate
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: NumToSpawn
-      value: 3000
+      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: SpawnAtOnce
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: nextSpawnTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
+        type: 3}
+      propertyPath: targetSpawnRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
+        type: 3}
+      propertyPath: targetSpawnAtOnce
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90db9c7cba9df864bbf73e8db314519f, type: 3}
@@ -4008,17 +4018,37 @@ PrefabInstance:
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: SpawnRate
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: NumToSpawn
-      value: 3000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
         type: 3}
       propertyPath: SpawnAtOnce
-      value: 10
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
+        type: 3}
+      propertyPath: SpawnRateChange
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
+        type: 3}
+      propertyPath: targetSpawnRate
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
+        type: 3}
+      propertyPath: SpawnAtOnceChange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093015341098856992, guid: 90db9c7cba9df864bbf73e8db314519f,
+        type: 3}
+      propertyPath: targetSpawnAtOnce
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90db9c7cba9df864bbf73e8db314519f, type: 3}
@@ -4067,7 +4097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad9ebe2607f5d349a75cc6ef19e68c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCapsules: 10000
+  EnemyNumberCapsules: 6000
+  AllyNumberCapsules: 900
   capsuleVelocity: 1
 --- !u!114 &1138683411
 MonoBehaviour:

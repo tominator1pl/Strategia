@@ -5,6 +5,7 @@ using Unity.Mathematics;
 
 public struct GameSettingsComponent : IComponentData
 {
-    public int numCapsules;
+    public int EnemyNumberCapsules;
+    public int AllyNumberCapsules;
     public float capsuleVelocity;
 }

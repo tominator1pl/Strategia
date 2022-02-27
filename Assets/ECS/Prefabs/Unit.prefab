@@ -422,7 +422,7 @@ MonoBehaviour:
     y: 0
     z: 0
   nextRetarget: 0
-  TargetReached: 0
+  ManualTarget: 0
   TargetZone:
     serializedVersion: 2
     x: 0

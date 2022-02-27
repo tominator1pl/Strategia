@@ -35,11 +35,17 @@ public class UnitSpawnSystem : SystemBase
 
         double time = Time.ElapsedTime;
         bool paused = Utils.paused;
+        bool lost = Utils.lost;
+        int enemyUnits = Utils.enemyUnits;
+        int allyUnits = Utils.allyUnits;
         Entities.WithAll<UnitSpawnPointTag>().ForEach((ref UnitSpawnPointTag unitSpawnPointTag, ref UnitComponents unitBase, in TeamTag teamTag, in Translation position) =>
         {
             if (paused) return;
+            if (lost) return;
             if (unitSpawnPointTag.Enabled == false) return;
-            if( time >= unitSpawnPointTag.nextSpawnTime) {
+            if (teamTag.Value == TeamValue.Ally && allyUnits >= settings.AllyNumberCapsules) return; //limit ally units
+            if (teamTag.Value == TeamValue.Enemy && enemyUnits >= settings.EnemyNumberCapsules) return; // limit enemy units
+            if ( time >= unitSpawnPointTag.nextSpawnTime) {
                 for(int i = 0; i < unitSpawnPointTag.SpawnAtOnce; i++) {
                     if (unitSpawnPointTag.Enabled == false) return;
                     Entity e = commandBuffer.Instantiate(unitPrefab);
@@ -60,6 +66,8 @@ public class UnitSpawnSystem : SystemBase
                 
                 }
                 unitSpawnPointTag.nextSpawnTime = time + unitSpawnPointTag.SpawnRate;
+                unitSpawnPointTag.SpawnAtOnce += unitSpawnPointTag.SpawnAtOnceChange;
+                if (unitSpawnPointTag.SpawnAtOnce > unitSpawnPointTag.targetSpawnAtOnce) unitSpawnPointTag.SpawnAtOnce = unitSpawnPointTag.targetSpawnAtOnce;
             }
 
         }).Schedule();

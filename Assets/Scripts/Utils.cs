@@ -16,6 +16,7 @@ public static class Utils
 
     public static int heartHealth;
     public static int allyUnits;
+    public static int enemyUnits;
     public static int selectedUnits;
 
     public static bool lost = false;

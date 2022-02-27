@@ -33,10 +33,12 @@ public class UISystem : SystemBase
     {
         var teamTags = m_UnitQuery.ToComponentDataArray<TeamTag>(Allocator.TempJob);
         var hearts = m_HeartQuery.ToComponentDataArray<UnitComponents>(Allocator.TempJob);
-        int teamUnitCount = 0;
-        foreach(TeamTag team in teamTags)
+        int allyUnitCount = 0;
+        int enemyUnitCount = 0;
+        foreach (TeamTag team in teamTags)
         {
-            if (team.Value == TeamValue.Ally) teamUnitCount++;
+            if (team.Value == TeamValue.Ally) allyUnitCount++;
+            if (team.Value == TeamValue.Enemy) enemyUnitCount++;
         }
         int selectedUnits = m_SelectedUnitQuery.CalculateEntityCountWithoutFiltering();
         int heartHealth = 0;
@@ -45,7 +47,8 @@ public class UISystem : SystemBase
             heartHealth = hearts[0].Health;
         }
 
-        Utils.allyUnits = teamUnitCount;
+        Utils.allyUnits = allyUnitCount;
+        Utils.enemyUnits = enemyUnitCount;
         Utils.heartHealth = heartHealth;
         Utils.selectedUnits = selectedUnits;
 

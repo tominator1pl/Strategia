@@ -20,7 +20,7 @@ public class MenuS : MonoBehaviour
     void OnStartClick()
     {
         World.DisposeAllWorlds();
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
         DefaultWorldInitialization.Initialize("World");
     }
 
