@@ -38,7 +38,6 @@ public class CollisionSystem : SystemBase
     [BurstCompile]
     public struct TickDamagePlayerOnCollisionJob : ICollisionEventsJob
     {
-        //[ReadOnly] [DeallocateOnJobCompletion] public NativeArray<Entity> units;
 
         public ComponentDataFromEntity<UnitComponents> unitComponents;
         [ReadOnly] public ComponentDataFromEntity<TeamTag> teamTag;
@@ -47,7 +46,7 @@ public class CollisionSystem : SystemBase
         {
             var entityA = collisionEvent.EntityA;
             var entityB = collisionEvent.EntityB;
-            //Debug.Log("ass");
+
 
             if(teamTag.HasComponent(entityA) && teamTag.HasComponent(entityB) && unitComponents.HasComponent(entityA) && unitComponents.HasComponent(entityB))
             {
